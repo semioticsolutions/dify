@@ -67,7 +67,7 @@ def enable_segments_to_index_task(segment_ids: list, dataset_id: str, document_i
             )
 
             if dataset_document.doc_form == IndexType.PARENT_CHILD_INDEX:
-                child_chunks = segment.child_chunks
+                child_chunks = segment.get_child_chunks()
                 if child_chunks:
                     child_documents = []
                     for child_chunk in child_chunks:
@@ -99,7 +99,7 @@ def enable_segments_to_index_task(segment_ids: list, dataset_id: str, document_i
             {
                 "error": str(e),
                 "status": "error",
-                "disabled_at": datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None),
+                "disabled_at": datetime.datetime.now(datetime.UTC).replace(tzinfo=None),
                 "enabled": False,
             }
         )
